@@ -177,15 +177,8 @@ static int Firebase_Analytics_LogTable(lua_State* L) {
 				params[size] = analytics::Parameter(k, lua_toboolean(L, -1) != 0);
 			break;
 			case LUA_TNUMBER:
-			{
-				const double n = lua_tonumber(L, -1);
-				if (n == (int)n) {
-					params[size] = analytics::Parameter(k, lua_tointeger(L, -1));
-				} else {
-					params[size] = analytics::Parameter(k, lua_tonumber(L, -1));
-				}
-				break;
-			}
+				params[size] = analytics::Parameter(k, lua_tonumber(L, -1));
+			break;
 			default:  /* other values */
 				char msg[256];
 				snprintf(msg, sizeof(msg), "Wrong type for table attribute '%s' , type: '%s'", k, luaL_typename(L, -1));
